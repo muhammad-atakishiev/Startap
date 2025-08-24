@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Сотрудничество</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #e2ebf0);
+      color: #333;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #2b4d8c;
+    }
+    p { font-size: 16px; margin-bottom: 20px; text-align: center; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    input, textarea {
+      width: 100%; padding: 12px; margin-bottom: 20px;
+      border-radius: 10px; border: 1px solid #ccc; transition: 0.2s;
+    }
+    input:focus, textarea:focus { border-color: #2b4d8c; outline: none; }
+    button {
+      background-color: #2b4d8c; color: white; padding: 14px 24px;
+      border: none; border-radius: 12px; cursor: pointer; font-size: 16px;
+      width: 100%; transition: 0.3s;
+    }
+    button:hover { background-color: #1e3a6d; }
+    .back-button {
+      margin-top: 20px; display: inline-block; text-align: center;
+      text-decoration: none; color: white; background: #2b4d8c;
+      padding: 12px 20px; border-radius: 10px; font-weight: bold; transition: 0.3s;
+    }
+    .back-button:hover { background-color: #1e3a6d; }
+    .success-message {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 20px;
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="formContainer">
+    <h1>Обсудим сотрудничество?</h1>
+    <p>Оставьте ваше предложение — и я свяжусь с вами! ВНИМАНИЕ: не пишите глупости, пишите только по теме</p>
+    <form id="contactForm">
+      <label for="name">Ваше имя</label>
+      <input type="text" id="name" name="name" placeholder="Введите имя" required>
+
+      <label for="email">Эл. почта</label>
+      <input type="email" id="email" name="email" placeholder="Введите почту" required>
+
+      <label for="message">Сообщение</label>
+      <textarea id="message" name="message" rows="5" placeholder="Расскажите о сотрудничестве..." required></textarea>
+
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
+
+  <script>
+    const BOT_TOKEN = "8203131686:AAGuV3ygkipeDI9dELFFtYSUikFQqZDZ4Hw";
+    const CHAT_ID = "8052103275";
+
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let message = document.getElementById("message").value;
+
+      let text = `📩 Новое сообщение с сайта:\n\n👤 Имя: ${name}\n📧 Почта: ${email}\n💬 Сообщение:\n${message}`;
+
+      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: text
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("formContainer").innerHTML = `
+          <h1>Спасибо!</h1>
+          <p class="success-message">Вы отправили своё сообщение ✅</p>
+          <div style="text-align:center;">
+            <a href="index.html" class="back-button">Вернуться обратно</a>
+          </div>
+        `;
+      })
+      .catch(error => {
+        alert("Ошибка при отправке ❌");
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>

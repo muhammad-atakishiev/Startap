@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Проекты — Мухаммад</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0e0e0e;
+      color: #f4f4f4;
+      line-height: 1.6;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2#typed-title {
+      font-size: 2rem;
+      color: #00ffd5;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      text-align: center;
+      white-space: pre;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 1px;
+      background-color: #00ffd5;
+      margin-left: 2px;
+      animation: blink 0.7s infinite;
+      height: 1em;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .projects {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .project-card {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s;
+    }
+
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-card:hover {
+      box-shadow: 0 0 15px #00ffd5;
+    }
+
+    .project-card h3 {
+      color: #00ffd5;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #00ffd5;
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .button:hover {
+      background: #00e0c0;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #00ffd5;
+    }
+
+    .back-button {
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h2 id="typed-title"><span id="text"></span><span class="cursor"></span></h2>
+    <div class="projects">
+      <div class="project-card">
+        <h3>Blank of maney</h3>
+        <p>Blank of maney — это сайт с выгодной покупкой и быстрым пополнением.</p>
+        <a href="C:/Users/User/OneDrive/Desktop/blank of money/index.html" class="button" target="_blank">Смотреть</a>
+      </div>
+      <div class="project-card">
+        <h3>Калькулятор</h3>
+        <p>Простой калькулятор на JavaScript с чистым дизайном.</p>
+        <a href="https://example.com/calc" class="button" target="_blank">Открыть</a>
+      </div>
+      <div class="project-card">
+        <h3>Сайт-визитка</h3>
+        <p>Минималистичный сайт-визитка с QR-кодом.</p>
+        <a href="https://example.com/visit" class="button" target="_blank">Смотреть</a>
+      </div>
+    </div>
+    <a href="index.html" class="button back-button">Вернуться на главную</a>
+  </section>
+
+  <script>
+    const text = "Мои проекты";
+    const textElement = document.getElementById("text");
+    let index = 0;
+
+    function typeText() {
+      if (index < text.length) {
+        textElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeText, 120);
+      }
+    }
+
+    const cards = document.querySelectorAll('.project-card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    cards.forEach(card => observer.observe(card));
+
+    window.addEventListener("load", typeText);
+  </script>
+</body>
+</html>

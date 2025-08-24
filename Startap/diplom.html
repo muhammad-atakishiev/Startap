@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мой диплом</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0e0e0e;
+      color: #f4f4f4;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 3rem;
+      color: #00ffd5;
+      margin-bottom: 30px;
+    }
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      background-color: #00ffd5;
+      margin-left: 4px;
+      animation: blink 0.7s infinite;
+      height: 1em;
+      vertical-align: middle;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    img {
+      max-width: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffd533;
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: fadeInZoom 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+    @keyframes fadeInZoom {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+        box-shadow: 0 0 0px #00ffd500;
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 20px #00ffd533;
+      }
+    }
+    a.button {
+      display: inline-block;
+      padding: 12px 25px;
+      background: #00ffd5;
+      color: #000;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+      animation-delay: 1.5s;
+    }
+    a.button:hover {
+      background: #00e5c0;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px #00ffd533;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1><span id="typed-text"></span><span class="cursor"></span></h1>
+  <img src="c:\Users\User\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\BAC9162B47C56FC8A4D2A519803D51B3\Изображение WhatsApp 2025-08-09 в 00.15.05_d662a99b.jpg" alt="Диплом">
+  <a href="index.html" class="button">Вернуться обратно</a>
+
+  <script>
+    const text = "Мой диплом";
+    const element = document.getElementById("typed-text");
+    let index = 0;
+    function typeText() {
+      if (index < text.length) {
+        element.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeText, 150);
+      }
+    }
+    window.addEventListener("load", typeText);
+  </script>
+</body>
+</html>

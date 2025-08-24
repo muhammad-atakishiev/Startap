@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Контакты — Мухаммад</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0e0e0e;
+      color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      min-height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #00ffd5;
+      margin-bottom: 20px;
+    }
+    .cursor {
+      display: inline-block;
+      width: 1px;
+      background-color: #00ffd5;
+      margin-left: 2px;
+      animation: blink 0.7s infinite;
+      height: 1em;
+      vertical-align: middle;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .contact-info p {
+      margin: 10px 0;
+      font-size: 1.1rem;
+    }
+    a {
+      color: #00ffd5;
+      text-decoration: none;
+    }
+    a.button {
+      margin-top: 30px;
+      display: inline-block;
+      background: #00ffd5;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    a.button:hover {
+      background: #00e0c0;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1><span id="typed-title"></span><span class="cursor"></span></h1>
+  <div class="contact-info">
+    <p>Telegram: <a href="https://t.me/vin_cat12" target="_blank">@Limik_King</a></p>
+    <p>Discord: mr_delphinita</p>
+    <p>WhatsApp: <a href="https://wa.me/77020742582" target="_blank">+7 702 074 2582</a></p>
+  </div>
+  <a href="index.html" class="button">Назад на сайт</a>
+
+  <script>
+    const text = "Связаться со мной;";
+    const element = document.getElementById("typed-title");
+    let index = 0;
+
+    function typeText() {
+      if (index < text.length) {
+        element.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeText, 120);
+      }
+    }
+
+    window.addEventListener("load", typeText);
+  </script>
+</body>
+</html>
